@@ -7,6 +7,7 @@ public:
     int** matrix = NULL;
     int n, m;
     void fillMatrix();
+    MatrixCalc* addMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
 
     MatrixCalc(int n, int m) {
         if (n <= 0 || m <= 0)
@@ -54,6 +55,22 @@ void MatrixCalc::fillMatrix() {
             this->matrix[i][j] = number;
         }
     }
+}
+
+MatrixCalc* MatrixCalc::addMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2) {
+    if (matrix1->n <= 0 || matrix2->n <= 0 || matrix1->m <= 0 || matrix2->m <= 0)
+        return NULL;
+    if ((matrix1->n != matrix2->n) || (matrix1->m != matrix2->m))
+        return NULL;
+    MatrixCalc* result = new MatrixCalc(matrix1->n, matrix1->m);
+    for (int i = 0; i < this->n; i++)
+    {
+        for (int j = 0; j < this->m; j++)
+        {
+            result->matrix[i][j] = matrix1->matrix[i][j] + matrix2->matrix[i][j];
+        }
+    }
+    return result;
 }
 
 int main()
