@@ -12,6 +12,7 @@ public:
     MatrixCalc* numberMultMatrix(MatrixCalc* matrix, int num);
     MatrixCalc* numberDivMatrix(MatrixCalc* matrix, int num);
     MatrixCalc* multMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
+    MatrixCalc* transMatrix(MatrixCalc* matrix);
 
     MatrixCalc(int n, int m) {
         if (n <= 0 || m <= 0)
@@ -137,6 +138,21 @@ MatrixCalc* MatrixCalc::multMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2)
             {
                 result->matrix[i][j] += matrix1->matrix[i][k] * matrix2->matrix[k][j];
             }
+        }
+    }
+    return result;
+}
+
+MatrixCalc* MatrixCalc::transMatrix(MatrixCalc* matrix)
+{
+    if (matrix->n <= 0 || matrix->m <= 0)
+        return NULL;
+    MatrixCalc* result = new MatrixCalc(matrix->m, matrix->n);
+    for (int i = 0; i < matrix->m; i++)
+    {
+        for (int j = 0; j < matrix->n; j++)
+        {
+            result->matrix[i][j] = matrix->matrix[j][i];
         }
     }
     return result;

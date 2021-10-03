@@ -138,6 +138,8 @@ namespace UnitTest
 			Assert::IsNull(testMatrix1->subMatrix(testMatrix1, testMatrix2));
 		}
 	};
+
+
 	TEST_CLASS(NumberMultiplyMatrixTest)
 	{
 	public:
@@ -166,6 +168,8 @@ namespace UnitTest
 					Assert::AreEqual(testMatrix1->matrix[i][j], costResult[i][j]);
 		}
 	};
+
+
 	TEST_CLASS(NumberDivisionMatrixTest)
 	{
 	public:
@@ -194,16 +198,19 @@ namespace UnitTest
 					Assert::AreEqual(testMatrix1->matrix[i][j], costResult[i][j]);
 		}
 	};
+
+
 	TEST_CLASS(MultiplyMatrixTest)
 	{
-		TEST_METHOD(NumberDivisionMatrixTest1)
+	public:
+		TEST_METHOD(MultiplyMatrixTest1)
 		{
 			MatrixCalc* testMatrix1 = new MatrixCalc(-1, -1);
 			MatrixCalc* testMatrix2 = new MatrixCalc(-1, -1);
 
 			Assert::IsNull(testMatrix1->multMatrix(testMatrix1, testMatrix2));
 		}
-		TEST_METHOD(NumberDivisionMatrixTest2)
+		TEST_METHOD(MultiplyMatrixTest2)
 		{
 			int** testCostMatrix1 = new int* [2]{	new int[2]{ 2, 4 },
 													new int[2]{ 6, 8 },
@@ -223,7 +230,7 @@ namespace UnitTest
 				for (int j = 0; j < 2; j++)
 					Assert::AreEqual(testMatrix1->multMatrix(testMatrix1, testMatrix2)->matrix[i][j], costResult[i][j]);
 		}
-		TEST_METHOD(NumberDivisionMatrixTest3)
+		TEST_METHOD(MultiplyMatrixTest3)
 		{
 			int** testCostMatrix1 = new int* [2]{	new int[2]{ 2, 4 },
 													new int[2]{ 6, 8 },
@@ -243,14 +250,14 @@ namespace UnitTest
 				for (int j = 0; j < 2; j++)
 					Assert::AreEqual(testMatrix1->multMatrix(testMatrix2, testMatrix1)->matrix[i][j], costResult[i][j]);
 		}
-		TEST_METHOD(NumberDivisionMatrixTest4)
+		TEST_METHOD(MultiplyMatrixTest4)
 		{
 			MatrixCalc* testMatrix1 = new MatrixCalc(2, 4);
 			MatrixCalc* testMatrix2 = new MatrixCalc(2, 4);
 
 			Assert::IsNull(testMatrix1->multMatrix(testMatrix1, testMatrix2));
 		}
-		TEST_METHOD(NumberDivisionMatrixTest5)
+		TEST_METHOD(MultiplyMatrixTest5)
 		{
 			int** testCostMatrix1 = new int* [2]{	new int[3]{ 1, 2, 0 },
 													new int[3]{ 3, 1, -1 },
@@ -270,6 +277,37 @@ namespace UnitTest
 			for (int i = 0; i < 2; i++)
 				for (int j = 0; j < 1; j++)
 					Assert::AreEqual(testMatrix1->multMatrix(testMatrix1, testMatrix2)->matrix[i][j], costResult[i][j]);
+		}
+	};
+
+	TEST_CLASS(TranspositionMatrixTest)
+	{
+		TEST_METHOD(TranspositionMatrixTest1)
+		{
+			MatrixCalc* testMatrix = new MatrixCalc(-1, -1);
+			Assert::IsNull(testMatrix->transMatrix(testMatrix));
+		}
+		TEST_METHOD(TranspositionMatrixTest2)
+		{
+			int** testCostMatrix = new int* [3]{ new int[6]{ 3, 6, 9, 12, 15, 18 },
+														new int[6]{ 21, 24, 27, 30, 33, 36 },
+														new int[6]{ 39, 42, 45, 48, 51, 54 }
+			};
+			MatrixCalc* testMatrix = new MatrixCalc(3, 6, testCostMatrix);
+
+			int** costResult = new int* [6]{		new int[3]{ 3, 21, 39 },
+													new int[3]{ 6, 24, 42},
+													new int[3]{ 9, 27, 45},
+													new int[3]{ 12, 30, 48},
+													new int[3]{ 15, 33, 51},
+													new int[3]{ 18, 36, 54}
+			};
+
+			MatrixCalc* result = testMatrix->transMatrix(testMatrix);
+
+			for (int i = 0; i < 6; i++)
+				for (int j = 0; j < 3; j++)
+					Assert::AreEqual(result->matrix[i][j], costResult[i][j]);
 		}
 	};
 }
