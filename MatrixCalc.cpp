@@ -9,6 +9,7 @@ public:
     void fillMatrix();
     MatrixCalc* addMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
     MatrixCalc* subMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
+    MatrixCalc* numberMultMatrix(MatrixCalc* matrix, int num);
 
     MatrixCalc(int n, int m) {
         if (n <= 0 || m <= 0)
@@ -88,6 +89,20 @@ MatrixCalc* MatrixCalc::subMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2) {
         }
     }
     return result;
+}
+
+MatrixCalc* MatrixCalc::numberMultMatrix(MatrixCalc* matrix, int num)
+{
+    if (matrix->n <= 0 || matrix->m <= 0)
+        return NULL;
+    for (int i = 0; i < matrix->n; i++)
+    {
+        for (int j = 0; j < matrix->m; j++)
+        {
+            matrix->matrix[i][j] *= num;
+        }
+    }
+    return matrix;
 }
 
 int main()
