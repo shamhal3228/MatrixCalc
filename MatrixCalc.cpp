@@ -13,6 +13,7 @@ public:
     MatrixCalc* numberDivMatrix(MatrixCalc* matrix, int num);
     MatrixCalc* multMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
     MatrixCalc* transMatrix(MatrixCalc* matrix);
+    void printMatrix();
 
     MatrixCalc(int n, int m) {
         if (n <= 0 || m <= 0)
@@ -158,7 +159,136 @@ MatrixCalc* MatrixCalc::transMatrix(MatrixCalc* matrix)
     return result;
 }
 
+void MatrixCalc::printMatrix()
+{
+    if (n <= 0 || m <= 0)
+        return;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+            cout << matrix[i][j] << " ";
+        cout << '\n';
+    }
+    cout << '\n';
+}
+
 int main()
 {
-   
+    setlocale(LC_CTYPE, "rus");
+
+    int command = -1;
+
+    while (command != 0)
+    {
+        int n, m, number;
+        cout << "Выберите команду:\n1.Сложить две матрицы\n2.Вычесть из одной матрицы другую\n3.Умножить матрицу на число\n4.Разделить матрицу на число\n5.Перемножить две матрицы\n6.Транспонировать матрицу\n0. Выход из программы\n";
+        cin >> command;
+        switch (command)
+        {
+        case 1:
+        {
+            cout << "Введите размерность и значения первой матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix1 = new MatrixCalc(n, m);
+            matrix1->fillMatrix();
+            cout << "Введите размерность и значения второй матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix2 = new MatrixCalc(n, m);
+            matrix2->fillMatrix();
+
+            cout << "Результат:\n";
+            MatrixCalc* result = matrix1->addMatrix(matrix1, matrix2);
+            result->printMatrix();
+            break;
+        }
+        case 2:
+        {
+            cout << "Введите размерность и значения первой матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix1 = new MatrixCalc(n, m);
+            matrix1->fillMatrix();
+            cout << "Введите размерность и значения второй матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix2 = new MatrixCalc(n, m);
+            matrix2->fillMatrix();
+
+            cout << "Результат:\n";
+            MatrixCalc* result = matrix1->subMatrix(matrix1, matrix2);
+            result->printMatrix();
+            break;
+        }
+        case 3:
+        {
+            cout << "Введите размерность и значения матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix1 = new MatrixCalc(n, m);
+            matrix1->fillMatrix();
+            cout << "Введите число:\n";
+            cin >> n;
+
+            cout << "Результат:\n";
+            MatrixCalc* result = matrix1->numberMultMatrix(matrix1, n);
+            result->printMatrix();
+            break;
+        }
+        case 4:
+        {
+            cout << "Введите размерность и значения матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix1 = new MatrixCalc(n, m);
+            matrix1->fillMatrix();
+            cout << "Введите число:\n";
+            cin >> n;
+
+            cout << "Результат:\n";
+            MatrixCalc* result = matrix1->numberDivMatrix(matrix1, n);
+            result->printMatrix();
+            break;
+        }
+        case 5:
+        {
+            cout << "Введите размерность и значения первой матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix1 = new MatrixCalc(n, m);
+            matrix1->fillMatrix();
+            cout << "Введите размерность и значения второй матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix2 = new MatrixCalc(n, m);
+            matrix2->fillMatrix();
+
+            cout << "Результат:\n";
+            MatrixCalc* result = matrix1->multMatrix(matrix1, matrix2);
+            result->printMatrix();
+            break;
+        }
+        case 6:
+        {
+            cout << "Введите размерность и значения матрицы:\n";
+            cin >> n >> m;
+            MatrixCalc* matrix1 = new MatrixCalc(n, m);
+            matrix1->fillMatrix();
+
+            cout << "Результат:\n";
+            MatrixCalc* result = matrix1->transMatrix(matrix1);
+            result->printMatrix();
+            break;
+        }
+        case 0:
+        {
+            cout << "Введите ноль снова, если хотите закончить программу\n";
+            cin >> command;
+            if (command == 0)
+            {
+                cout << "Спасибо за внимание! Работа программы завершена";
+                return 0;
+            }
+            break;
+        }
+        default:
+        {
+            cout << "Некорректное значение- попробуйте снова\n";
+            break;
+        }
+        }
+    }
 }
