@@ -10,6 +10,8 @@ public:
     MatrixCalc* addMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
     MatrixCalc* subMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
     MatrixCalc* numberMultMatrix(MatrixCalc* matrix, int num);
+    MatrixCalc* numberDivMatrix(MatrixCalc* matrix, int num);
+    MatrixCalc* multMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2);
 
     MatrixCalc(int n, int m) {
         if (n <= 0 || m <= 0)
@@ -103,6 +105,41 @@ MatrixCalc* MatrixCalc::numberMultMatrix(MatrixCalc* matrix, int num)
         }
     }
     return matrix;
+}
+
+MatrixCalc* MatrixCalc::numberDivMatrix(MatrixCalc* matrix, int num)
+{
+    if (matrix->n <= 0 || matrix->m <= 0)
+        return NULL;
+    for (int i = 0; i < matrix->n; i++)
+    {
+        for (int j = 0; j < matrix->m; j++)
+        {
+            matrix->matrix[i][j] /= num;
+        }
+    }
+    return matrix;
+}
+
+MatrixCalc* MatrixCalc::multMatrix(MatrixCalc* matrix1, MatrixCalc* matrix2)
+{
+    if (matrix1->n <= 0 || matrix2->n <= 0 || matrix1->m <= 0 || matrix2->m <= 0)
+        return NULL;
+    if (matrix1->m != matrix2->n)
+        return NULL;
+    MatrixCalc* result = new MatrixCalc(matrix1->n, matrix2->m);
+    for (int i = 0; i < matrix1->n; i++)
+    {
+        for (int j = 0; j < matrix2->m; j++)
+        {
+            result->matrix[i][j] = 0;
+            for (int k = 0; k < matrix1->m; k++)
+            {
+                result->matrix[i][j] += matrix1->matrix[i][k] * matrix2->matrix[k][j];
+            }
+        }
+    }
+    return result;
 }
 
 int main()
