@@ -13,15 +13,15 @@ namespace UnitTest
 		{
 			MatrixCalc* testMatrix = new MatrixCalc(-1, -1);
 
-			Assert::IsNull(testMatrix->matrix);
+			Assert::IsNull(testMatrix->object->matrix);
 		}
 		TEST_METHOD(MatrixConstructorTest2)
 		{
 			MatrixCalc* testMatrix = new MatrixCalc(3, 6);
 
-			Assert::IsNotNull(testMatrix->matrix);
-			Assert::AreEqual(testMatrix->n, 3);
-			Assert::AreEqual(testMatrix->m, 6);
+			Assert::IsNotNull(testMatrix->object->matrix);
+			Assert::AreEqual(testMatrix->object->n, 3);
+			Assert::AreEqual(testMatrix->object->m, 6);
 		}
 		TEST_METHOD(MatrixConstructorTest3)
 		{
@@ -33,9 +33,9 @@ namespace UnitTest
 
 			for (int i=0; i<3; i++)
 				for (int j=0; j<6; j++)
-					Assert::AreEqual(testMatrix->matrix[i][j], testCostMatrix[i][j]);
-			Assert::AreEqual(testMatrix->n, 3);
-			Assert::AreEqual(testMatrix->m, 6);
+					Assert::AreEqual(testMatrix->object->matrix[i][j], testCostMatrix[i][j]);
+			Assert::AreEqual(testMatrix->object->n, 3);
+			Assert::AreEqual(testMatrix->object->m, 6);
 		}
 	};
 
@@ -70,7 +70,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 6; j++)
-					Assert::AreEqual(testMatrix1->addMatrix(testMatrix1, testMatrix2)->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(testMatrix1->addMatrix(testMatrix1, testMatrix2)->object->matrix[i][j], costResult[i][j]);
 		}
 		TEST_METHOD(AddMatrixTest3)
 		{
@@ -120,7 +120,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 6; j++)
-					Assert::AreEqual(testMatrix1->subMatrix(testMatrix1, testMatrix2)->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(testMatrix1->subMatrix(testMatrix1, testMatrix2)->object->matrix[i][j], costResult[i][j]);
 		}
 		TEST_METHOD(SubstractMatrixTest3)
 		{
@@ -165,7 +165,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 6; j++)
-					Assert::AreEqual(testMatrix1->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(testMatrix1->object->matrix[i][j], costResult[i][j]);
 		}
 	};
 
@@ -195,7 +195,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 6; j++)
-					Assert::AreEqual(testMatrix1->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(testMatrix1->object->matrix[i][j], costResult[i][j]);
 		}
 	};
 
@@ -228,7 +228,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 2; i++)
 				for (int j = 0; j < 2; j++)
-					Assert::AreEqual(testMatrix1->multMatrix(testMatrix1, testMatrix2)->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(testMatrix1->multMatrix(testMatrix1, testMatrix2)->object->matrix[i][j], costResult[i][j]);
 		}
 		TEST_METHOD(MultiplyMatrixTest3)
 		{
@@ -248,7 +248,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 2; i++)
 				for (int j = 0; j < 2; j++)
-					Assert::AreEqual(testMatrix1->multMatrix(testMatrix2, testMatrix1)->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(testMatrix1->multMatrix(testMatrix2, testMatrix1)->object->matrix[i][j], costResult[i][j]);
 		}
 		TEST_METHOD(MultiplyMatrixTest4)
 		{
@@ -276,7 +276,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 2; i++)
 				for (int j = 0; j < 1; j++)
-					Assert::AreEqual(testMatrix1->multMatrix(testMatrix1, testMatrix2)->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(testMatrix1->multMatrix(testMatrix1, testMatrix2)->object->matrix[i][j], costResult[i][j]);
 		}
 	};
 
@@ -307,7 +307,7 @@ namespace UnitTest
 
 			for (int i = 0; i < 6; i++)
 				for (int j = 0; j < 3; j++)
-					Assert::AreEqual(result->matrix[i][j], costResult[i][j]);
+					Assert::AreEqual(result->object->matrix[i][j], costResult[i][j]);
 		}
 	};
 }
